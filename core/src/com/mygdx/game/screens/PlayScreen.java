@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
@@ -50,6 +49,8 @@ public class PlayScreen implements Screen{
     Preferences preferences;
     private int direction;
     private Boolean swipe;
+
+    private Boolean firstTap;
 
     public PlayScreen(Swiper game) {
         this.game = game;
@@ -142,16 +143,21 @@ public class PlayScreen implements Screen{
         controls.add(new Label(Input.Keys.toString(keys.get(2)), new Label.LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Input.Keys.toString(keys.get(3)), new Label.LabelStyle(game.textFont, Color.WHITE)));
         for (Label l:controls) {
-            l.setPosition(0,(game.gameHeight/2)-70);
+            l.setPosition(-50,(game.gameHeight/2)-100);
         }
-        scoreLabel.setPosition(-game.gameWidth/2+100,(game.gameHeight/2)-70);
-        highScoreLabel.setPosition(-game.gameWidth/2+100,(game.gameHeight/2)-130);
+        scoreLabel.setPosition(-game.gameWidth/2,(game.gameHeight/2)-100);
+        highScoreLabel.setPosition(-game.gameWidth/2,(game.gameHeight/2)-180);
         score = 0;
         alphaColor = 1;
         alphaControl = 1;
         timer = 100;
 
+        firstTap = true;
+
+
+
     }
+
 
     @Override
     public void show() {
@@ -178,25 +184,29 @@ public class PlayScreen implements Screen{
     private void handleInput() {
         timer--;
         alphaColor -= .01;
-        if(swipe){
-                if(keys.get(currentColor) == direction){
+
+
+                if (swipe) {
+                    if (keys.get(currentColor) == direction) {
+                        firstTap = false;
+                        correct();
+                        direction = 4;
+                    } else if (!(keys.get(currentColor) != direction && direction == 4) || timer <= 0) {
+                        inCorrect();
+                    }
+                } else if (Gdx.input.isKeyJustPressed(keys.get(currentColor))) {
                     correct();
-                    direction = 4;
-                }else if (!(keys.get(currentColor) != direction && direction ==4) || timer <= 0){
+                } else if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || timer <= 0) {
                     inCorrect();
-            }
-        }
-        else if (Gdx.input.isKeyJustPressed(keys.get(currentColor))) {
-            correct();
-        } else if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || timer <= 0) {
-            inCorrect();
-        }
+                }
+        
+
     }
 
     @Override
     public void resize(int width, int height) {
         gameViewPort.update(width, height);
-        game.createFonts();
+
     }
 
     @Override

@@ -20,8 +20,8 @@ public class Swiper extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		gameHeight = Gdx.graphics.getHeight();
-		gameWidth = Gdx.graphics.getWidth();
+		gameHeight = 1000;
+		gameWidth = 500;
 		createFonts();
 		setScreen(new MenuScreen(this));
 	}
@@ -31,9 +31,9 @@ public class Swiper extends Game {
 		FileHandle fontFile = Gdx.files.internal("SF.ttf");
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		parameter.size = 80;
+		parameter.size = 100;
 		textFont = generator.generateFont(parameter);
-		parameter.size = 40;
+		parameter.size = 150;
 		titleFont = generator.generateFont(parameter);
 		generator.dispose();
 	}
