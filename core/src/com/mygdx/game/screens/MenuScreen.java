@@ -3,15 +3,17 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FillViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.Swiper;
+
 
 /**
  * Created by acurr on 2/7/2017.
@@ -21,13 +23,19 @@ public class MenuScreen implements Screen {
     private final OrthographicCamera camera;
     private final Swiper game;
     private final Viewport gameViewPort;
+    private final Label titleLabel;
+
 
     public MenuScreen(Swiper game) {
         this.game = game;
         background = new Sprite(new Texture(Gdx.files.internal("Gray.png")));
         background.scale(5);
         camera = new OrthographicCamera();
-        gameViewPort = new ScreenViewport(camera);
+        gameViewPort = new ExtendViewport(game.gameWidth,game.gameHeight,camera);
+        titleLabel = new Label("Swiper!",new Label.LabelStyle(game.textFont, Color.WHITE));
+        titleLabel.setPosition(-game.gameWidth/6,(game.gameHeight/2)-70);
+
+
     }
 
     @Override
@@ -43,6 +51,7 @@ public class MenuScreen implements Screen {
         game.batch.begin();
         background.setPosition(-game.gameWidth / 2, -game.gameHeight / 2);
         background.draw(game.batch, 1);
+        titleLabel.draw(game.batch,1);
         handleInput();
         game.batch.end();
 
@@ -57,6 +66,9 @@ public class MenuScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gameViewPort.update(width, height);
+        camera.update();
+        //game.createFonts();
+        //titleLabel.setStyle(new Label.LabelStyle(game.textFont,Color.WHITE));
     }
 
     @Override

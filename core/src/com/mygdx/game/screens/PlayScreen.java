@@ -52,8 +52,6 @@ public class PlayScreen implements Screen{
     private Boolean swipe;
 
     public PlayScreen(Swiper game) {
-
-
         this.game = game;
         camera = new OrthographicCamera();
         gameViewPort = new ExtendViewport(game.gameWidth,game.gameHeight,camera);
@@ -137,19 +135,16 @@ public class PlayScreen implements Screen{
         }
         direction = 4;
         keys.shuffle();
-        highScoreLabel = new Label(String.valueOf(getHighscore()),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.valueOf(score),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        controls.add(new Label(Input.Keys.toString(keys.get(0)), new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
-        controls.add(new Label(Input.Keys.toString(keys.get(1)), new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
-        controls.add(new Label(Input.Keys.toString(keys.get(2)), new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
-        controls.add(new Label(Input.Keys.toString(keys.get(3)), new Label.LabelStyle(new BitmapFont(), Color.WHITE)));
+        highScoreLabel = new Label(String.valueOf(getHighscore()),new Label.LabelStyle(game.textFont, Color.WHITE));
+        scoreLabel = new Label(String.valueOf(score),new Label.LabelStyle(game.textFont, Color.WHITE));
+        controls.add(new Label(Input.Keys.toString(keys.get(0)), new Label.LabelStyle(game.textFont, Color.WHITE)));
+        controls.add(new Label(Input.Keys.toString(keys.get(1)), new Label.LabelStyle(game.textFont, Color.WHITE)));
+        controls.add(new Label(Input.Keys.toString(keys.get(2)), new Label.LabelStyle(game.textFont, Color.WHITE)));
+        controls.add(new Label(Input.Keys.toString(keys.get(3)), new Label.LabelStyle(game.textFont, Color.WHITE)));
         for (Label l:controls) {
-            l.setFontScale(3);
             l.setPosition(0,(game.gameHeight/2)-70);
         }
-        scoreLabel.setFontScale(3);
         scoreLabel.setPosition(-game.gameWidth/2+100,(game.gameHeight/2)-70);
-        highScoreLabel.setFontScale(3);
         highScoreLabel.setPosition(-game.gameWidth/2+100,(game.gameHeight/2)-130);
         score = 0;
         alphaColor = 1;
@@ -201,6 +196,7 @@ public class PlayScreen implements Screen{
     @Override
     public void resize(int width, int height) {
         gameViewPort.update(width, height);
+        game.createFonts();
     }
 
     @Override
