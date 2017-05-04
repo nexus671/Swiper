@@ -49,8 +49,8 @@ public class PlayScreen implements Screen{
     Preferences preferences;
     private int direction;
     private Boolean swipe;
+    private Boolean firsttap;
 
-    private Boolean firstTap;
 
     public PlayScreen(Swiper game) {
         this.game = game;
@@ -152,10 +152,7 @@ public class PlayScreen implements Screen{
         alphaControl = 1;
         timer = 100;
 
-        firstTap = true;
-
-
-
+        firsttap = true;
     }
 
 
@@ -184,24 +181,27 @@ public class PlayScreen implements Screen{
     private void handleInput() {
         timer--;
         alphaColor -= .01;
+            if(firsttap) {
+                direction = 4;
+                firsttap = false;
+            }
 
-
-                if (swipe) {
+            if (swipe) {
+                if(!firsttap) {
                     if (keys.get(currentColor) == direction) {
-                        firstTap = false;
                         correct();
                         direction = 4;
                     } else if (!(keys.get(currentColor) != direction && direction == 4) || timer <= 0) {
                         inCorrect();
                     }
-                } else if (Gdx.input.isKeyJustPressed(keys.get(currentColor))) {
-                    correct();
-                } else if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || timer <= 0) {
-                    inCorrect();
                 }
-        
 
-    }
+            } else if (Gdx.input.isKeyJustPressed(keys.get(currentColor))) {
+                correct();
+            } else if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY) || timer <= 0) {
+                inCorrect();
+            }
+        }
 
     @Override
     public void resize(int width, int height) {

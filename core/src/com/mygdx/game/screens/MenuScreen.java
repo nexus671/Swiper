@@ -60,7 +60,7 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)   {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.batch.setProjectionMatrix(camera.combined);
@@ -83,14 +83,18 @@ public class MenuScreen implements Screen {
 
     }
 
-    private void handleInput() {
+    private void handleInput()   {
         Rectangle shape2D = new Rectangle(300,340,530,200);
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new PlayScreen(game));
         }
         else if(Gdx.input.justTouched()){
-            if(shape2D.contains(Gdx.input.getX(),Gdx.input.getY())){
-                game.setScreen(new PlayScreen(game));
+            while(Gdx.input.isTouched()) {
+            }
+            if(!Gdx.input.isTouched()) {
+                if (shape2D.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                    game.setScreen(new PlayScreen(game));
+                }
             }
         }
     }
