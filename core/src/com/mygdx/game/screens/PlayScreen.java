@@ -49,7 +49,7 @@ public class PlayScreen implements Screen{
     Preferences preferences;
     private int direction;
     private Boolean swipe;
-    private Boolean firsttap;
+    private Boolean firstTap;
 
 
     public PlayScreen(Swiper game) {
@@ -152,7 +152,7 @@ public class PlayScreen implements Screen{
         alphaControl = 1;
         timer = 100;
 
-        firsttap = true;
+        firstTap = true;
     }
 
 
@@ -181,13 +181,13 @@ public class PlayScreen implements Screen{
     private void handleInput() {
         timer--;
         alphaColor -= .01;
-            if(firsttap) {
+            if(firstTap) {
                 direction = 4;
-                firsttap = false;
+                firstTap = false;
             }
 
             if (swipe) {
-                if(!firsttap) {
+                if(!firstTap) {
                     if (keys.get(currentColor) == direction) {
                         correct();
                         direction = 4;
