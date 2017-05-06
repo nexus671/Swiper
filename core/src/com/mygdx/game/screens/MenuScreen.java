@@ -9,11 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Shape2D;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.*;
 
 import com.mygdx.game.Swiper;
@@ -52,8 +48,8 @@ public class MenuScreen implements Screen {
 
         shapeRenderer = new ShapeRenderer();
 
-         startButton = new Rectangle(0,600,game.gameWidth*2+100,300);
-         quitButton = new Rectangle(0,1000,game.gameWidth*2+100,350);
+         startButton = new Rectangle(0,game.gameHeight-400,game.gameWidth*2+100,300);
+         quitButton = new Rectangle(0,game.gameHeight-100,game.gameWidth*2+100,350);
 
     }
 
@@ -74,7 +70,6 @@ public class MenuScreen implements Screen {
         quitLabel.draw(game.batch,1);
         startLabel.draw(game.batch,1);
         game.batch.end();
-
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
