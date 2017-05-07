@@ -39,7 +39,7 @@ public class AndroidLauncher extends AndroidApplication {
 				RelativeLayout.LayoutParams.WRAP_CONTENT
 		);
 
-		layout.addView(adView,adParams);
+		//layout.addView(adView,adParams); Stoping ads for now till can move to the bottom
 		adView.loadAd(builder.build());
 		setContentView(layout);
 		//initialize(new Swiper(), config);

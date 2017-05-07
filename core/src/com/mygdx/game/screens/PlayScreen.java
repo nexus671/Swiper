@@ -67,7 +67,7 @@ public class PlayScreen implements Screen{
         sound3 = Gdx.audio.newSound(Gdx.files.internal("f5.ogg"));
         sound4 = Gdx.audio.newSound(Gdx.files.internal("d5.ogg"));
         death = Gdx.audio.newSound(Gdx.files.internal("ping.ogg"));
-        preferences = Gdx.app.getPreferences("Swiper");
+        preferences =  Gdx.app.getPreferences("Swiper");
         if(!preferences.contains("highScore")){
             preferences.putInteger("highscore",0);
         }
@@ -270,6 +270,10 @@ public class PlayScreen implements Screen{
             setHighsore(score);
             highScoreLabel.setText(String.valueOf(getHighscore()));
         }
-        game.setScreen(new MenuScreen(game));
+        game.setScreen(new GameOverScreen(game,this));
+    }
+
+    public int getScore() {
+        return score;
     }
 }
