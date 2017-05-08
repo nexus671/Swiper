@@ -11,11 +11,12 @@ import com.mygdx.game.screens.MenuScreen;
 
 public class Swiper extends Game {
 	public SpriteBatch batch;
-	public  int gameWidth;
-    public  int gameHeight;
+	public final float GAME_WIDTH = 1280;
+    public  final float GAME_HEIGHT = 720;
     AdHandler handler;
 	public BitmapFont titleFont;
 	public BitmapFont textFont;
+	public float aspectRatio;
 
 	public Swiper(AdHandler handler){
 		this.handler = handler;
@@ -25,8 +26,7 @@ public class Swiper extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		gameHeight = 1000;
-		gameWidth = 500;
+		aspectRatio = (float)Gdx.graphics.getWidth()/(float)Gdx.graphics.getHeight();
 		createFonts();
 		setScreen(new MenuScreen(this));
 	}
@@ -37,9 +37,9 @@ public class Swiper extends Game {
 		FileHandle fontFile = Gdx.files.internal("SF.ttf");
 		FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
 		FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-		parameter.size = 100;
-		textFont = generator.generateFont(parameter);
 		parameter.size = 150;
+		textFont = generator.generateFont(parameter);
+		parameter.size = 200;
 		titleFont = generator.generateFont(parameter);
 		generator.dispose();
 	}

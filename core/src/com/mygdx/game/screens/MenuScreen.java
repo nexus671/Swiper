@@ -20,7 +20,6 @@ import com.mygdx.game.Swiper;
  */
 public class MenuScreen implements Screen {
     private final Sprite background;
-    private final OrthographicCamera camera;
     private final Swiper game;
     private final Viewport gameViewPort;
     private final Label titleLabel;
@@ -36,21 +35,20 @@ public class MenuScreen implements Screen {
         game.toggleAds(true);
         background = new Sprite(new Texture(Gdx.files.internal("Gray.png")));
         background.scale(5);
-        camera = new OrthographicCamera();
-        gameViewPort = new StretchViewport(game.gameWidth,game.gameHeight,camera);
+        gameViewPort = new StretchViewport(game.GAME_WIDTH*game.aspectRatio,game.GAME_HEIGHT);  ///FIX THIS SHIT AND FIGURE OUT HOW TO USE IT!
         titleLabel = new Label("Swiper!",new Label.LabelStyle(game.titleFont, Color.WHITE));
         startLabel = new Label("Start",new Label.LabelStyle(game.textFont, Color.WHITE));
         quitLabel  = new Label("Quit",new Label.LabelStyle(game.textFont, Color.WHITE));
-        background.setPosition(-game.gameWidth / 2, -game.gameHeight / 2);
-        titleLabel.setPosition(-game.gameWidth/3,(game.gameHeight/2)-150);
-        startLabel.setPosition(-game.gameWidth/5, 50);
-        quitLabel.setPosition(-game.gameWidth/7,-150);
+        background.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+        titleLabel.setPosition((Gdx.graphics.getWidth()/2)-titleLabel.getWidth()/2,Gdx.graphics.getHeight() - titleLabel.getHeight() );
+        startLabel.setPosition((Gdx.graphics.getWidth()/2)-(startLabel.getWidth()/2), Gdx.graphics.getHeight()*.55f);
+        quitLabel.setPosition((Gdx.graphics.getWidth()/2)-(quitLabel.getWidth()/2),Gdx.graphics.getHeight()*.35f);
         Gdx.gl.glLineWidth(32);
-
         shapeRenderer = new ShapeRenderer();
 
-         startButton = new Rectangle(0,game.gameHeight-400,game.gameWidth*2+100,300);
-         quitButton = new Rectangle(0,game.gameHeight-100,game.gameWidth*2+100,350);
+         startButton = new Rectangle(0,Gdx.graphics.getHeight()*.40f -startLabel.getHeight(),Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*.20f);
+
+         quitButton = new Rectangle(0,Gdx.graphics.getHeight()*.60f - quitLabel.getHeight(),Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*.20f);
 
     }
 
@@ -63,8 +61,7 @@ public class MenuScreen implements Screen {
     public void render(float delta)   {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.batch.setProjectionMatrix(camera.combined);
+        System.out.println(Gdx.input.getX()+","+Gdx.input.getY());
         game.batch.begin();
         background.draw(game.batch, 1);
         titleLabel.draw(game.batch,1);
@@ -72,11 +69,10 @@ public class MenuScreen implements Screen {
         startLabel.draw(game.batch,1);
         game.batch.end();
         shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.line(-game.gameWidth,200,game.gameWidth,200);
-        shapeRenderer.line(-game.gameWidth,0,game.gameWidth,0);
-        shapeRenderer.line(-game.gameWidth,-200,game.gameWidth,-200);
+        shapeRenderer.line(0,Gdx.graphics.getHeight()*.60f +startLabel.getHeight(),Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*.60f+startLabel.getHeight());
+        shapeRenderer.line(0,Gdx.graphics.getHeight()*.40f +quitLabel.getHeight(),Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*.40f +quitLabel.getHeight());
+        shapeRenderer.line(0,Gdx.graphics.getHeight()*.20f + quitLabel.getHeight(),Gdx.graphics.getWidth(),Gdx.graphics.getHeight()*.20f + quitLabel.getHeight());
         shapeRenderer.end();
         handleInput();
 
@@ -103,7 +99,6 @@ public class MenuScreen implements Screen {
     @Override
     public void resize(int width, int height) {
         gameViewPort.update(width, height);
-        camera.update();
     }
 
     @Override

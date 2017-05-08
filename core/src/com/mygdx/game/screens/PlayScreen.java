@@ -4,12 +4,12 @@ import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.SimpleDirectionGestureDetector;
 import com.mygdx.game.Swiper;
@@ -26,7 +26,6 @@ public class PlayScreen implements Screen{
     private final Texture orange;
     private final Texture yellow;
     private final Sprite gray;
-    private final OrthographicCamera camera;
     private final Swiper game;
     private final Viewport gameViewPort;
 
@@ -55,8 +54,7 @@ public class PlayScreen implements Screen{
     public PlayScreen(Swiper game) {
         this.game = game;
         game.toggleAds(false);
-        camera = new OrthographicCamera();
-        gameViewPort = new ExtendViewport(game.gameWidth,game.gameHeight,camera);
+        gameViewPort = new StretchViewport(game.GAME_WIDTH,game.GAME_HEIGHT);
         cyan = new Texture(Gdx.files.internal("Cyan.png"));
         yellow = new Texture(Gdx.files.internal("Yellow.png"));
         orange = new Texture(Gdx.files.internal("Orange.png"));
@@ -143,11 +141,15 @@ public class PlayScreen implements Screen{
         controls.add(new Label(Input.Keys.toString(keys.get(1)), new Label.LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Input.Keys.toString(keys.get(2)), new Label.LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Input.Keys.toString(keys.get(3)), new Label.LabelStyle(game.textFont, Color.WHITE)));
+        gray.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
         for (Label l:controls) {
-            l.setPosition(-50,(game.gameHeight/2)-100);
+            l.setPosition((Gdx.graphics.getWidth()/2)-l.getWidth()/2,Gdx.graphics.getHeight() - l.getHeight() );
         }
-        scoreLabel.setPosition(-game.gameWidth/2,(game.gameHeight/2)-100);
-        highScoreLabel.setPosition(-game.gameWidth/2,(game.gameHeight/2)-180);
+        for (Sprite c:colors){
+            c.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+        }
+        scoreLabel.setPosition(Gdx.graphics.getWidth()*.10f,Gdx.graphics.getHeight()*.90f);
+        highScoreLabel.setPosition(Gdx.graphics.getWidth()*.10f,Gdx.graphics.getHeight()*.82f);
         score = 0;
         alphaColor = 1;
         alphaControl = 1;
@@ -166,11 +168,10 @@ public class PlayScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
-        gray.setPosition(-game.gameWidth / 2, -game.gameHeight / 2);
+
         gray.draw(game.batch, 1);
-        colors.get(currentColor).setPosition(-game.gameWidth / 2, -game.gameHeight / 2);
+
         colors.get(currentColor).draw(game.batch, alphaColor);
         controls.get(currentColor).draw(game.batch,alphaControl);
         scoreLabel.draw(game.batch,1);
@@ -235,7 +236,7 @@ public class PlayScreen implements Screen{
         }
 
     }
-    public  void setHighsore(int hs){
+    public  void setHighscore(int hs){
         preferences.putInteger("highScore",hs);
         preferences.flush();
     }
@@ -268,7 +269,7 @@ public class PlayScreen implements Screen{
     private void inCorrect(){
         death.play();
         if(score > getHighscore()){
-            setHighsore(score);
+            setHighscore(score);
             highScoreLabel.setText(String.valueOf(getHighscore()));
         }
         game.setScreen(new GameOverScreen(game,this));
