@@ -13,8 +13,13 @@ public class Swiper extends Game {
 	public SpriteBatch batch;
 	public  int gameWidth;
     public  int gameHeight;
+    AdHandler handler;
 	public BitmapFont titleFont;
 	public BitmapFont textFont;
+
+	public Swiper(AdHandler handler){
+		this.handler = handler;
+	}
 
 	
 	@Override
@@ -25,6 +30,7 @@ public class Swiper extends Game {
 		createFonts();
 		setScreen(new MenuScreen(this));
 	}
+
 
 
 	public void createFonts() {
@@ -51,5 +57,8 @@ public class Swiper extends Game {
 	@Override
 	public void dispose () {
 		batch.dispose();
+	}
+	public void toggleAds(boolean toggle){
+		handler.showAds(toggle);
 	}
 }

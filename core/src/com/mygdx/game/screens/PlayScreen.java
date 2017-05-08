@@ -54,6 +54,7 @@ public class PlayScreen implements Screen{
 
     public PlayScreen(Swiper game) {
         this.game = game;
+        game.toggleAds(false);
         camera = new OrthographicCamera();
         gameViewPort = new ExtendViewport(game.gameWidth,game.gameHeight,camera);
         cyan = new Texture(Gdx.files.internal("Cyan.png"));

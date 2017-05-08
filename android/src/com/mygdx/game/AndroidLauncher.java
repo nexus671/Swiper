@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import android.os.Bundle;
 
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -12,15 +14,32 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
-public class AndroidLauncher extends AndroidApplication {
+public class AndroidLauncher extends AndroidApplication implements AdHandler {
 	private static final String TAG = "AndroidLauncher";
+	private final int SHOW_ADS = 1;
+	private final int HIDE_ADS = 0;
 	protected AdView adView;
+
+
+
+	Handler handler = new Handler(){
+		@Override
+		public void handleMessage(Message msg) {
+			switch (msg.what){
+				case  SHOW_ADS:
+					adView.setVisibility(View.VISIBLE);
+					break;
+				case HIDE_ADS:
+					adView.setVisibility(View.GONE);
+			}
+		}
+	};
 	@Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		RelativeLayout layout = new RelativeLayout(this);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		View gameView = initializeForView(new Swiper(), config);
+		View gameView = initializeForView(new Swiper(this), config);
 		layout.addView(gameView);
 		adView = new AdView(this);
 
@@ -38,10 +57,16 @@ public class AndroidLauncher extends AndroidApplication {
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT
 		);
+		adParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
 
-		//layout.addView(adView,adParams); Stoping ads for now till can move to the bottom
+
+		layout.addView(adView,adParams);
 		adView.loadAd(builder.build());
 		setContentView(layout);
-		//initialize(new Swiper(), config);
+	}
+
+	@Override
+	public void showAds(boolean show) {
+		handler.sendEmptyMessage(show ? SHOW_ADS : HIDE_ADS);
 	}
 }

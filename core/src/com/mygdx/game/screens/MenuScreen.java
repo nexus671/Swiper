@@ -33,6 +33,7 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(Swiper game) {
         this.game = game;
+        game.toggleAds(true);
         background = new Sprite(new Texture(Gdx.files.internal("Gray.png")));
         background.scale(5);
         camera = new OrthographicCamera();
