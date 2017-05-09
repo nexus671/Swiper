@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.NeoNexus671.Swiper;
 
 import android.os.Bundle;
 
@@ -52,7 +52,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId("ca-app-pub-4083946983046027/6249509590");
 		AdRequest.Builder builder = new AdRequest.Builder();
-		builder.addTestDevice("6381DD4BC5C8B60502B4F508ACF4E414");
+		//builder.addTestDevice("6381DD4BC5C8B60502B4F508ACF4E414");
 		RelativeLayout.LayoutParams adParams = new RelativeLayout.LayoutParams(
 				RelativeLayout.LayoutParams.WRAP_CONTENT,
 				RelativeLayout.LayoutParams.WRAP_CONTENT

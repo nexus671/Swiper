@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.NeoNexus671.Swiper;
 
 /**
  * Created by acurr on 5/8/2017.

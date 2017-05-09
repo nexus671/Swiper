@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.NeoNexus671.Swiper;
 
 import com.badlogic.gdx.input.GestureDetector;
 

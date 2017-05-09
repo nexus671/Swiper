@@ -1,9 +1,9 @@
-package com.mygdx.game.client;
+package com.NeoNexus671.Swiper.client;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import com.mygdx.game.Swiper;
+import com.NeoNexus671.Swiper.Swiper;
 
 public class HtmlLauncher extends GwtApplication {
 

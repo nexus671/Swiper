@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.NeoNexus671.Swiper;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -6,8 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.mygdx.game.screens.MenuScreen;
+import com.NeoNexus671.Swiper.screens.MenuScreen;
 
 public class Swiper extends Game {
 	public SpriteBatch batch;

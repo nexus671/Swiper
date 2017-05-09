@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.NeoNexus671.Swiper.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.Swiper;
+import com.NeoNexus671.Swiper.Swiper;
 
 /**
  * Created by acurr on 5/6/2017.

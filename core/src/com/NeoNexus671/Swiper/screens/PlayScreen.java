@@ -1,4 +1,4 @@
-package com.mygdx.game.screens;
+package com.NeoNexus671.Swiper.screens;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Sound;
@@ -8,11 +8,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.SimpleDirectionGestureDetector;
-import com.mygdx.game.Swiper;
+import com.NeoNexus671.Swiper.SimpleDirectionGestureDetector;
+import com.NeoNexus671.Swiper.Swiper;
 
 import java.util.Random;
 
