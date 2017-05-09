@@ -42,7 +42,7 @@ public class PlayScreen implements Screen{
     private int score;
     private float alphaColor;
     private float alphaControl;
-    private int timer;
+    private float timer;
     private final Label scoreLabel, highScoreLabel;
     private final Array<Label> controls;
     Preferences preferences;
@@ -180,7 +180,7 @@ public class PlayScreen implements Screen{
     }
 
     private void handleInput() {
-        timer--;
+        timer -= 1.7;
         alphaColor -= .01;
             if(firstTap) {
                 direction = 4;
