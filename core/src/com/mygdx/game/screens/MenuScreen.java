@@ -61,7 +61,7 @@ public class MenuScreen implements Screen {
         alphaSwitch = true;
         background = new Sprite(new Texture(Gdx.files.internal("Gray.png")));
         background.scale(5);
-        gameViewPort = new StretchViewport(game.GAME_WIDTH*game.aspectRatio,game.GAME_HEIGHT);  ///FIX THIS SHIT AND FIGURE OUT HOW TO USE IT!
+        gameViewPort = new StretchViewport(game.GAME_WIDTH*game.aspectRatio,game.GAME_HEIGHT);
         titleLabel = new Label("Swiper!",new Label.LabelStyle(game.titleFont, Color.WHITE));
         startLabel = new Label("Start",new Label.LabelStyle(game.textFont, Color.WHITE));
         quitLabel  = new Label("Quit",new Label.LabelStyle(game.textFont, Color.WHITE));
