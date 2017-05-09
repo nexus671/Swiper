@@ -3,6 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,10 +29,14 @@ public class GameOverScreen implements Screen {
     ShapeRenderer shapeRenderer;
     Rectangle playButton;
     Rectangle menuButton;
+    private final Sound sound1;
+    private final Sound sound2;
 
     public GameOverScreen(Swiper game,PlayScreen playScreen) {
         this.game = game;
         game.toggleAds(true);
+        sound1 = Gdx.audio.newSound(Gdx.files.internal("g5.ogg"));
+        sound2 = Gdx.audio.newSound(Gdx.files.internal("c5.ogg"));
         background = new Sprite(new Texture(Gdx.files.internal("Gray.png")));
         background.scale(5);
         gameViewPort = new StretchViewport(game.GAME_WIDTH,game.GAME_HEIGHT);
@@ -85,6 +90,8 @@ public class GameOverScreen implements Screen {
     private void handleInput()   {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            sound1.play();
+            sound2.play();
             game.setScreen(new PlayScreen(game));
         }
         else if(Gdx.input.justTouched()){
@@ -92,8 +99,12 @@ public class GameOverScreen implements Screen {
             }
             if(!Gdx.input.isTouched()) {
                 if (playButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                    sound1.play();
+                    sound2.play();
                     game.setScreen(new PlayScreen(game));
                 } else if (menuButton.contains(Gdx.input.getX(),Gdx.input.getY())){
+                    sound1.play();
+                    sound2.play();
                     game.setScreen(new MenuScreen(game));
                 }
             }
