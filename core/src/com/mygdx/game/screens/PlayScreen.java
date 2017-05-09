@@ -150,7 +150,7 @@ public class PlayScreen implements Screen{
         }
         scoreLabel.setPosition(Gdx.graphics.getWidth()*.10f,Gdx.graphics.getHeight()*.90f);
         highScoreLabel.setPosition(Gdx.graphics.getWidth()*.10f,Gdx.graphics.getHeight()*.82f);
-        score = 95;
+        score = 0;
         alphaColor = 1;
         alphaControl = 1;
         timer = 100;
@@ -258,6 +258,7 @@ public class PlayScreen implements Screen{
             int i = 0;
             for (Label l:controls) {
                 l.setText(Input.Keys.toString(keys.get(i)));
+                l.setPosition((Gdx.graphics.getWidth()/2)-l.getWidth()/2,Gdx.graphics.getHeight() - l.getHeight() );
                 i++;
             }
             alphaControl = 1;
