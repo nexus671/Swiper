@@ -26,6 +26,7 @@ public class GameOverScreen implements Screen {
     private final Label playLabel;
     private final Label menuLabel;
     private final Label scoreLabel;
+    private final Label highScoreLabel;
     ShapeRenderer shapeRenderer;
     Rectangle playButton;
     Rectangle menuButton;
@@ -41,15 +42,16 @@ public class GameOverScreen implements Screen {
         background.scale(5);
         gameViewPort = new StretchViewport(game.GAME_WIDTH,game.GAME_HEIGHT);
         gameOverLabel = new Label("Game Over!",new Label.LabelStyle(game.titleFont, Color.WHITE));
-        scoreLabel = new Label("Your score was "+playScreen.getScore()+" the high score is "+playScreen.getHighscore(),new Label.LabelStyle(game.textFont, Color.WHITE));
+        scoreLabel = new Label("Score: "+playScreen.getScore(),new Label.LabelStyle(game.textFont, Color.WHITE));
+        highScoreLabel = new Label("Highscore: "+playScreen.getHighscore(),new Label.LabelStyle(game.textFont, Color.WHITE));
         playLabel = new Label("Play Again",new Label.LabelStyle(game.textFont, Color.WHITE));
         menuLabel = new Label("Main Menu",new Label.LabelStyle(game.textFont, Color.WHITE));
         background.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
         gameOverLabel.setPosition((Gdx.graphics.getWidth()/2)-gameOverLabel.getWidth()/2,Gdx.graphics.getHeight() - gameOverLabel.getHeight());
-        scoreLabel.setFontScale(.50f);
         playLabel.setPosition((Gdx.graphics.getWidth()/2)-(playLabel.getWidth()/2), Gdx.graphics.getHeight()*.55f);
         menuLabel.setPosition((Gdx.graphics.getWidth()/2)-(menuLabel.getWidth()/2),Gdx.graphics.getHeight()*.35f);
-        scoreLabel.setPosition(0,Gdx.graphics.getHeight()* .80f);
+        scoreLabel.setPosition((Gdx.graphics.getWidth()/2)-(scoreLabel.getWidth()/2),Gdx.graphics.getHeight()* .82f);
+        highScoreLabel.setPosition((Gdx.graphics.getWidth()/2)-(highScoreLabel.getWidth()/2),Gdx.graphics.getHeight()* .75f);
         Gdx.gl.glLineWidth(32);
 
         shapeRenderer = new ShapeRenderer();
@@ -76,6 +78,7 @@ public class GameOverScreen implements Screen {
         playLabel.draw(game.batch,1);
         menuLabel.draw(game.batch,1);
         scoreLabel.draw(game.batch,1);
+        highScoreLabel.draw(game.batch,1);
         game.batch.end();
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
