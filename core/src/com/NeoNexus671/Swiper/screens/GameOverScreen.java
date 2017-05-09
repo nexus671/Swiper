@@ -27,6 +27,8 @@ public class GameOverScreen implements Screen {
     public static final String HIGHSCORE = "Highscore: ";
     public static final String SCORE = "Score: ";
     public static final String GAME_OVER = "Game Over!";
+    public static final String G5_OGG = "g5.ogg";
+    public static final String C5_OGG = "c5.ogg";
     private final Sprite background;
     private final Swiper game;
     private final Viewport gameViewPort;
@@ -44,8 +46,8 @@ public class GameOverScreen implements Screen {
     public GameOverScreen(Swiper game, PlayScreen playScreen) {
         this.game = game;
         game.toggleAds(true);
-        sound1 = Gdx.audio.newSound(Gdx.files.internal("g5.ogg"));
-        sound2 = Gdx.audio.newSound(Gdx.files.internal("c5.ogg"));
+        sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
+        sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
         background = new Sprite(new Texture(Gdx.files.internal(GRAY_PNG)));
         background.scale(5);
         gameViewPort = new StretchViewport(game.GAME_WIDTH, game.GAME_HEIGHT);
