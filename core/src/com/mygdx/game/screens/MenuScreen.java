@@ -174,5 +174,7 @@ public class MenuScreen implements Screen {
         for (Sprite t : colors) {
             t.getTexture().dispose();
         }
+        sound1.dispose();
+        sound2.dispose();
     }
 }

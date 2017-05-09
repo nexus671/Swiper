@@ -133,6 +133,9 @@ public class GameOverScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        background.getTexture().dispose();
+        shapeRenderer.dispose();
+        sound1.dispose();
+        sound2.dispose();
     }
 }
