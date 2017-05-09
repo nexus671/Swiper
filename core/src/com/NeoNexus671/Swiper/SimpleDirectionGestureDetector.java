@@ -6,6 +6,10 @@ import com.badlogic.gdx.input.GestureDetector;
  * Created by acurr on 2/9/2017.
  */
 public class SimpleDirectionGestureDetector extends GestureDetector {
+    public SimpleDirectionGestureDetector(DirectionListener directionListener) {
+        super(new DirectionGestureListener(directionListener));
+    }
+
     public interface DirectionListener {
         void onLeft();
 
@@ -16,32 +20,36 @@ public class SimpleDirectionGestureDetector extends GestureDetector {
         void onDown();
     }
 
-    public SimpleDirectionGestureDetector(DirectionListener directionListener) {
-        super(new DirectionGestureListener(directionListener));
-    }
-
     private static class DirectionGestureListener extends GestureAdapter {
         DirectionListener directionListener;
 
         public DirectionGestureListener(DirectionListener directionListener) {
             this.directionListener = directionListener;
         }
+
         @Override
         public boolean fling(float velocityX, float velocityY, int button) {
-            if(Math.abs(velocityX)>Math.abs(velocityY)){
-                if(velocityX>0){
+            if (Math.abs(velocityX) > Math.abs(velocityY)) {
+                if (velocityX > 0) {
                     directionListener.onRight();
-                }else{
+                } else {
                     directionListener.onLeft();
                 }
-            }else{
-                if(velocityY>0){
+            } else {
+                if (velocityY > 0) {
                     directionListener.onDown();
-                }else{
+                } else {
                     directionListener.onUp();
                 }
             }
             return super.fling(velocityX, velocityY, button);
+        }
+
+        @Override
+        public String toString() {
+            return "DirectionGestureListener{" +
+                    "directionListener=" + directionListener +
+                    '}';
         }
     }
 }
