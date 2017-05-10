@@ -19,6 +19,8 @@ public class Swiper extends Game {
     public BitmapFont textFont;
     public float aspectRatio;
     public static float volume = 1.0f;
+    public static int speakerCurrent = 0;
+
 
     public Swiper(AdHandler handler) {
         this.handler = handler;
@@ -45,15 +47,21 @@ public class Swiper extends Game {
         generator.dispose();
     }
 
-    public void muteGame(){
+    public static float getVolume() {
+        return volume;
+    }
+
+    public static void setVolume(float volume) {
+        Swiper.volume = volume;
+    }
+
+    public static void muteVolume(){
         volume = 0.0f;
     }
-     public void unMuteGame(){
+    public static void unmuteVolume(){
         volume = 1.0f;
-     }
-     public void setVolume(float volume){
-         Swiper.volume = volume;
-     }
+    }
+
 
     @Override
     public void dispose() {

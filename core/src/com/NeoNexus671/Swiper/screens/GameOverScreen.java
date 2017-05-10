@@ -110,20 +110,20 @@ public class GameOverScreen implements Screen {
     private void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-            sound1.play();
-            sound2.play();
+            sound1.play(Swiper.volume);
+            sound2.play(Swiper.volume);
             game.setScreen(new PlayScreen(game));
         } else if (Gdx.input.justTouched()) {
             while (Gdx.input.isTouched()) {
             }
             if (!Gdx.input.isTouched()) {
                 if (playButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                    sound1.play();
-                    sound2.play();
+                    sound1.play(Swiper.volume);
+                    sound2.play(Swiper.volume);
                     game.setScreen(new PlayScreen(game));
                 } else if (menuButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                    sound1.play();
-                    sound2.play();
+                    sound1.play(Swiper.volume);
+                    sound2.play(Swiper.volume);
                     game.setScreen(new MenuScreen(game));
                 }
             }

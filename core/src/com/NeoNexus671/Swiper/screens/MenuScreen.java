@@ -34,6 +34,10 @@ public class MenuScreen implements Screen {
     public static final String YELLOW_PNG = "Yellow.png";
     public static final String CYAN_PNG = "Cyan.png";
     private final Sprite background;
+    private final Sprite speaker;
+    private final Texture speakerOn;
+    private final Texture speakerOff;
+    private final Array<Texture> speakerSwitch;
     private final Texture cyan;
     private final Texture green;
     private final Texture orange;
@@ -49,6 +53,7 @@ public class MenuScreen implements Screen {
     private final ShapeRenderer shapeRenderer;
     private final Rectangle startButton;
     private final Rectangle quitButton;
+    private final Rectangle audioButton;
     private float alphaColor;
     private int colorindex;
     private boolean alphaSwitch;
@@ -80,6 +85,15 @@ public class MenuScreen implements Screen {
         background = new Sprite(new Texture(Gdx.files.internal(GRAY_PNG)));
         background.scale(5);
 
+        speaker = new Sprite(new Texture(Gdx.files.internal("speaker-off.png")));
+        speakerOff = new Texture(Gdx.files.internal("speaker-off.png"));
+        speakerOn = new Texture(Gdx.files.internal("speaker.png"));
+
+        speakerSwitch = new Array<Texture>();
+        speakerSwitch.add(speakerOff);
+        speakerSwitch.add(speakerOn);
+        speaker.setTexture(speakerSwitch.get(Swiper.speakerCurrent));
+
         gameViewPort = new StretchViewport(Swiper.GAME_WIDTH * game.aspectRatio, Swiper.GAME_HEIGHT);
 
         titleLabel = new Label(SWIPER, new LabelStyle(game.titleFont, Color.WHITE));
@@ -90,6 +104,7 @@ public class MenuScreen implements Screen {
         titleLabel.setPosition((Gdx.graphics.getWidth() / 2) - (titleLabel.getWidth() / 2), Gdx.graphics.getHeight() - titleLabel.getHeight());
         startLabel.setPosition((Gdx.graphics.getWidth() / 2) - (startLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.55f);
         quitLabel.setPosition((Gdx.graphics.getWidth() / 2) - (quitLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.35f);
+        speaker.setPosition((Gdx.graphics.getWidth() / 2) - (speaker.getWidth() / 2), Gdx.graphics.getHeight() * 0.15f);
 
         for (Sprite s : colors) {
             s.scale(5);
@@ -105,6 +120,7 @@ public class MenuScreen implements Screen {
 
         startButton = new Rectangle(0, (Gdx.graphics.getHeight() * .40f) - startLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
         quitButton = new Rectangle(0, (Gdx.graphics.getHeight() * .60f) - quitLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
+        audioButton = new Rectangle((Gdx.graphics.getWidth() / 2) - (speaker.getWidth() / 2),(Gdx.graphics.getHeight() * 0.85f) - speaker.getHeight(),speaker.getWidth(),speaker.getHeight());
 
     }
 
@@ -141,6 +157,7 @@ public class MenuScreen implements Screen {
         titleLabel.draw(game.batch, 1);
         quitLabel.draw(game.batch, 1);
         startLabel.draw(game.batch, 1);
+        speaker.draw(game.batch,1);
         game.batch.end();
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.begin(ShapeType.Line);
@@ -161,11 +178,22 @@ public class MenuScreen implements Screen {
             }
             if (!Gdx.input.isTouched()) {
                 if (startButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                    sound1.play();
-                    sound2.play();
+                    sound1.play(Swiper.volume);
+                    sound2.play(Swiper.volume);
                     game.setScreen(new PlayScreen(game));
                 } else if (quitButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
                     Gdx.app.exit();
+                } else  if (audioButton.contains(Gdx.input.getX(), Gdx.input.getY())){
+                    if(Swiper.speakerCurrent == 0){
+                        System.out.println("Dirt");
+                        Swiper.muteVolume();
+                    } else {
+                        Swiper.unmuteVolume();
+                        sound1.play(Swiper.volume);
+                        sound2.play(Swiper.volume);
+                    }
+                    Swiper.speakerCurrent ^= 1;
+                    speaker.setTexture(speakerSwitch.get(Swiper.speakerCurrent));
                 }
             }
         }
