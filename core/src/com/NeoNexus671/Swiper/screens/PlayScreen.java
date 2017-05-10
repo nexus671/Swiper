@@ -256,7 +256,7 @@ public class PlayScreen implements Screen {
         score++;
         scoreLabel.setText(String.valueOf(score));
         currentColor = random.nextInt(4);
-        sounds.get(currentColor).play();
+        sounds.get(currentColor).play(Swiper.volume);
         timer = 100;
         alphaColor = 1;
         if (alphaControl > 0) {
@@ -275,7 +275,7 @@ public class PlayScreen implements Screen {
     }
 
     private void inCorrect() {
-        death.play();
+        death.play(Swiper.volume);
         if (score > getHighscore()) {
             setHighscore(score);
             highScoreLabel.setText(String.valueOf(getHighscore()));

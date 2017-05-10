@@ -161,8 +161,8 @@ public class MenuScreen implements Screen {
             }
             if (!Gdx.input.isTouched()) {
                 if (startButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
-                    sound1.play();
-                    sound2.play();
+                    sound1.play(Swiper.volume);
+                    sound2.play(Swiper.volume);
                     game.setScreen(new PlayScreen(game));
                 } else if (quitButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
                     Gdx.app.exit();
