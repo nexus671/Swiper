@@ -76,19 +76,24 @@ public class PlayScreen implements Screen {
 
     public PlayScreen(Swiper game) {
         this.game = game;
+
         game.toggleAds(false);
-        gameViewPort = new StretchViewport(game.GAME_WIDTH, game.GAME_HEIGHT);
+
+        gameViewPort = new StretchViewport(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
+
         cyan = new Texture(Gdx.files.internal(CYAN_PNG));
         yellow = new Texture(Gdx.files.internal(YELLOW_PNG));
         orange = new Texture(Gdx.files.internal(ORANGE_PNG));
         green = new Texture(Gdx.files.internal(GREEN_PNG));
         gray = new Sprite(new Texture(Gdx.files.internal(GRAY_PNG)));
+
         sounds = new Array<Sound>();
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
         sound3 = Gdx.audio.newSound(Gdx.files.internal(F5_OGG));
         sound4 = Gdx.audio.newSound(Gdx.files.internal(D5_OGG));
         death = Gdx.audio.newSound(Gdx.files.internal(PING_OGG));
+
         preferences = Gdx.app.getPreferences(SWIPER);
         if (!preferences.contains(HIGH_SCORE)) {
             preferences.putInteger(HIGHSCORE, 0);
@@ -98,19 +103,24 @@ public class PlayScreen implements Screen {
         sounds.add(sound2);
         sounds.add(sound3);
         sounds.add(sound4);
+
         colors = new Array<Sprite>();
         colors.add(new Sprite(cyan));
         colors.add(new Sprite(yellow));
         colors.add(new Sprite(orange));
         colors.add(new Sprite(green));
+
         gray.scale(5);
         for (Sprite s : colors) {
             s.scale(5);
         }
+
         random = new Random();
         currentColor = random.nextInt(4);
+
         controls = new Array<Label>();
         keys = new Array<Integer>();
+
         if (((Gdx.app.getType() == Application.ApplicationType.Android) || (Gdx.app.getType() == Application.ApplicationType.iOS))) {
             swipe = true;
 
@@ -157,22 +167,29 @@ public class PlayScreen implements Screen {
             i++;
         }
         direction = 4;
+
         keys.shuffle();
+
         highScoreLabel = new Label(String.valueOf(getHighscore()), new LabelStyle(game.textFont, Color.WHITE));
         scoreLabel = new Label(String.valueOf(score), new LabelStyle(game.textFont, Color.WHITE));
         controls.add(new Label(Keys.toString(keys.get(0)), new LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Keys.toString(keys.get(1)), new LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Keys.toString(keys.get(2)), new LabelStyle(game.textFont, Color.WHITE)));
         controls.add(new Label(Keys.toString(keys.get(3)), new LabelStyle(game.textFont, Color.WHITE)));
-        gray.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+
+        gray.setPosition(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
+
         for (Label l : controls) {
             l.setPosition((Gdx.graphics.getWidth() / 2) - (l.getWidth() / 2), Gdx.graphics.getHeight() - l.getHeight());
         }
+
         for (Sprite c : colors) {
-            c.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+            c.setPosition(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
         }
+
         scoreLabel.setPosition(Gdx.graphics.getWidth() * 0.10f, Gdx.graphics.getHeight() * 0.90f);
-        highScoreLabel.setPosition(Gdx.graphics.getWidth() * 0.10f, Gdx.graphics.getHeight() * 0.82f);
+        highScoreLabel.setPosition(Gdx.graphics.getWidth() * 0.10f, Gdx.graphics.getHeight() * 0.82f)
+        ;
         score = 0;
         alphaColor = 1;
         alphaControl = 1;

@@ -45,27 +45,33 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(Swiper game, PlayScreen playScreen) {
         this.game = game;
+        
         game.toggleAds(true);
+        
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
+        
         background = new Sprite(new Texture(Gdx.files.internal(GRAY_PNG)));
         background.scale(5);
-        gameViewPort = new StretchViewport(game.GAME_WIDTH, game.GAME_HEIGHT);
+        
+        gameViewPort = new StretchViewport(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
+        
         gameOverLabel = new Label(GAME_OVER, new LabelStyle(game.titleFont, Color.WHITE));
         scoreLabel = new Label(SCORE + playScreen.getScore(), new LabelStyle(game.textFont, Color.WHITE));
         highScoreLabel = new Label(HIGHSCORE + playScreen.getHighscore(), new LabelStyle(game.textFont, Color.WHITE));
         playLabel = new Label(PLAY_AGAIN, new LabelStyle(game.textFont, Color.WHITE));
         menuLabel = new Label(MAIN_MENU, new LabelStyle(game.textFont, Color.WHITE));
-        background.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+        
+        background.setPosition(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
         gameOverLabel.setPosition((Gdx.graphics.getWidth() / 2) - (gameOverLabel.getWidth() / 2), Gdx.graphics.getHeight() - gameOverLabel.getHeight());
         playLabel.setPosition((Gdx.graphics.getWidth() / 2) - (playLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.55f);
         menuLabel.setPosition((Gdx.graphics.getWidth() / 2) - (menuLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.35f);
         scoreLabel.setPosition((Gdx.graphics.getWidth() / 2) - (scoreLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.82f);
         highScoreLabel.setPosition((Gdx.graphics.getWidth() / 2) - (highScoreLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.75f);
+        
         Gdx.gl.glLineWidth(32);
-
+        
         shapeRenderer = new ShapeRenderer();
-
         playButton = new Rectangle(0, (Gdx.graphics.getHeight() * .40f) - playLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
         menuButton = new Rectangle(0, (Gdx.graphics.getHeight() * .60f) - menuLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
 

@@ -56,42 +56,54 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(Swiper game) {
         this.game = game;
+
         game.toggleAds(true);
+
         cyan = new Texture(Gdx.files.internal(CYAN_PNG));
         yellow = new Texture(Gdx.files.internal(YELLOW_PNG));
         orange = new Texture(Gdx.files.internal(ORANGE_PNG));
         green = new Texture(Gdx.files.internal(GREEN_PNG));
+
         colors = new Array<Sprite>();
         colors.add(new Sprite(cyan));
         colors.add(new Sprite(yellow));
         colors.add(new Sprite(orange));
         colors.add(new Sprite(green));
+
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
+
         alphaColor = 1;
         colorindex = 0;
         alphaSwitch = true;
+
         background = new Sprite(new Texture(Gdx.files.internal(GRAY_PNG)));
         background.scale(5);
-        gameViewPort = new StretchViewport(game.GAME_WIDTH * game.aspectRatio, game.GAME_HEIGHT);
+
+        gameViewPort = new StretchViewport(Swiper.GAME_WIDTH * game.aspectRatio, Swiper.GAME_HEIGHT);
+
         titleLabel = new Label(SWIPER, new LabelStyle(game.titleFont, Color.WHITE));
         startLabel = new Label(START, new LabelStyle(game.textFont, Color.WHITE));
         quitLabel = new Label(QUIT, new LabelStyle(game.textFont, Color.WHITE));
-        background.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+
+        background.setPosition(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
         titleLabel.setPosition((Gdx.graphics.getWidth() / 2) - (titleLabel.getWidth() / 2), Gdx.graphics.getHeight() - titleLabel.getHeight());
         startLabel.setPosition((Gdx.graphics.getWidth() / 2) - (startLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.55f);
         quitLabel.setPosition((Gdx.graphics.getWidth() / 2) - (quitLabel.getWidth() / 2), Gdx.graphics.getHeight() * 0.35f);
+
         for (Sprite s : colors) {
             s.scale(5);
         }
+
         for (Sprite c : colors) {
-            c.setPosition(game.GAME_WIDTH, game.GAME_HEIGHT);
+            c.setPosition(Swiper.GAME_WIDTH, Swiper.GAME_HEIGHT);
         }
+
         Gdx.gl.glLineWidth(32);
+
         shapeRenderer = new ShapeRenderer();
 
         startButton = new Rectangle(0, (Gdx.graphics.getHeight() * .40f) - startLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
-
         quitButton = new Rectangle(0, (Gdx.graphics.getHeight() * .60f) - quitLabel.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 0.20f);
 
     }
