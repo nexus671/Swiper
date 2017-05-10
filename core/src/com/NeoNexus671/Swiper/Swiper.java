@@ -19,6 +19,7 @@ public class Swiper extends Game {
     public BitmapFont textFont;
     public float aspectRatio;
     public static float volume = 1.0f;
+    public static int speakerCurrent = 0;
 
     public Swiper(AdHandler handler) {
         this.handler = handler;
