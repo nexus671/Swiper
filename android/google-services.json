@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "956924787331",
+    "firebase_url": "https://swiper-28445680.firebaseio.com",
+    "project_id": "swiper-28445680",
+    "storage_bucket": "swiper-28445680.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956924787331:android:6d477c5c98902b39",
+        "android_client_info": {
+          "package_name": "com.NeoNexus671.Swiper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956924787331-m2gmuols78et1f8mjljudise369f6o24.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPPf8jXOfx4BuqMGJi_mR3gpjGbzV69VQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956924787331-m2gmuols78et1f8mjljudise369f6o24.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
