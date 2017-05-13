@@ -20,6 +20,7 @@ public class Swiper extends Game {
     public float aspectRatio;
     public static float volume = 1.0f;
     public static int speakerCurrent = 0;
+    public float densityIndependentSize;
 
 
     public Swiper(AdHandler handler) {
@@ -31,18 +32,20 @@ public class Swiper extends Game {
     public void create() {
         batch = new SpriteBatch();
         aspectRatio = Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
-        createFonts();
+        densityIndependentSize =  75 * Gdx.graphics.getDensity();
+        int fontSize = Math.round(densityIndependentSize);
+        createFonts(fontSize);
         setScreen(new MenuScreen(this));
     }
 
 
-    private void createFonts() {
+    private void createFonts(int fontsize) {
         FileHandle fontFile = Gdx.files.internal(SF_TTF);
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(fontFile);
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
-        parameter.size = 150;
+        parameter.size = (int)Math.round((fontsize*.70));
         textFont = generator.generateFont(parameter);
-        parameter.size = 200;
+        parameter.size = fontsize;
         titleFont = generator.generateFont(parameter);
         generator.dispose();
     }
