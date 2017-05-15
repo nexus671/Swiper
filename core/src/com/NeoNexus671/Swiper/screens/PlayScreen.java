@@ -281,6 +281,7 @@ public class PlayScreen implements Screen {
             setHighscore(score);
             highScoreLabel.setText(String.valueOf(getHighscore()));
         }
+        game.playServices.submitScore(getHighscore());
         game.setScreen(new GameOverScreen(game, this));
     }
 
