@@ -3,7 +3,6 @@ package com.NeoNexus671.Swiper;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -17,7 +16,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
 
