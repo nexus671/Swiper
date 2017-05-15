@@ -42,11 +42,12 @@ public class GameOverScreen implements Screen {
     private final ShapeRenderer shapeRenderer;
     private final Rectangle playButton;
     private final Rectangle menuButton;
+    private boolean firstShow;
 
     public GameOverScreen(Swiper game, PlayScreen playScreen) {
         this.game = game;
-        
         game.toggleAds(true);
+        firstShow = true;
         
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
@@ -103,6 +104,10 @@ public class GameOverScreen implements Screen {
         shapeRenderer.line(0, (Gdx.graphics.getHeight() * .40f) + menuLabel.getHeight(), Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() * .40f) + menuLabel.getHeight());
         shapeRenderer.line(0, (Gdx.graphics.getHeight() * .20f) + menuLabel.getHeight(), Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() * .20f) + menuLabel.getHeight());
         shapeRenderer.end();
+        if(firstShow){
+            game.playServices.showScore();
+            firstShow = false;
+        }
         handleInput();
     }
 

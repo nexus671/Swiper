@@ -205,6 +205,7 @@ public class PlayScreen implements Screen {
     private void setHighscore(int hs) {
         preferences.putInteger(HIGH_SCORE, hs);
         preferences.flush();
+        game.playServices.submitScore(hs);
     }
 
     @Override

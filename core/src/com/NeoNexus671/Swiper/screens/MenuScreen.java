@@ -61,7 +61,6 @@ public class MenuScreen implements Screen {
 
     public MenuScreen(Swiper game) {
         this.game = game;
-
         game.toggleAds(true);
 
         cyan = new Texture(Gdx.files.internal(CYAN_PNG));

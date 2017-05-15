@@ -21,10 +21,12 @@ public class Swiper extends Game {
     public static float volume = 1.0f;
     public static int speakerCurrent = 0;
     public float densityIndependentSize;
+    public PlayServices playServices;
 
 
     public Swiper(AdHandler handler) {
         this.handler = handler;
+        this.playServices = (PlayServices) handler;
     }
 
 

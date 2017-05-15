@@ -9,6 +9,7 @@ buildscript {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:2.2.2'
         classpath 'com.google.gms:google-services:3.0.0'
+
     }
 }
 
@@ -75,6 +76,8 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
         compile "com.google.android.gms:play-services-ads:$admobVersion"
         compile 'com.google.firebase:firebase-core:9.0.0'
+        compile project(':BaseGameUtils')
+        compile "com.google.android.gms:play-services-games:9.0.0"
     }
 }
 
@@ -90,6 +93,7 @@ project(":html") {
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion:sources"
         compile "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion:sources"
+
     }
 }
 

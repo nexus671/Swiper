@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/gagames-ids.xml.xml in your project.
+-->
+<resources>
+    <string name="app_id">956924787331</string>
+    <string name="package_name">com.NeoNexus671.Swiper</string>
+    <string name="leaderboard_swiper">CgkIg_Wl6ewbEAIQAA</string>
+</resources>
