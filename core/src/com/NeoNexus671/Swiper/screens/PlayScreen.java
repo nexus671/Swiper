@@ -12,6 +12,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
@@ -50,7 +51,6 @@ public class PlayScreen implements Screen {
     private final Sprite gray;
     private final Swiper game;
     private final Viewport gameViewPort;
-
     private final Array<Sprite> colors;
     private final Array<Integer> keys;
     private final Array<Sound> sounds;
@@ -63,7 +63,6 @@ public class PlayScreen implements Screen {
     private final Label scoreLabel;
     private final Label highScoreLabel;
     private final Array<Label> controls;
-    private final Preferences preferences;
     private int currentColor;
     private int score;
     private float alphaColor;
@@ -72,10 +71,12 @@ public class PlayScreen implements Screen {
     private int direction;
     private Boolean swipe;
     private Boolean firstTap;
+    ParticleEffect particleEffect;
 
 
     public PlayScreen(Swiper game) {
         this.game = game;
+        particleEffect = new ParticleEffect();
 
         game.toggleAds(false);
 
@@ -94,10 +95,7 @@ public class PlayScreen implements Screen {
         sound4 = Gdx.audio.newSound(Gdx.files.internal(D5_OGG));
         death = Gdx.audio.newSound(Gdx.files.internal(PING_OGG));
 
-        preferences = Gdx.app.getPreferences(SWIPER);
-        if (!preferences.contains(HIGH_SCORE)) {
-            preferences.putInteger(HIGHSCORE, 0);
-        }
+
 
         sounds.add(sound1);
         sounds.add(sound2);
@@ -199,12 +197,12 @@ public class PlayScreen implements Screen {
     }
 
     public int getHighscore() {
-        return preferences.getInteger(HIGH_SCORE);
+        return game.preferences.getInteger(HIGH_SCORE);
     }
 
     private void setHighscore(int hs) {
-        preferences.putInteger(HIGH_SCORE, hs);
-        preferences.flush();
+        game.preferences.putInteger(HIGH_SCORE, hs);
+        game.preferences.flush();
         game.playServices.submitScore(hs);
     }
 
@@ -343,7 +341,6 @@ public class PlayScreen implements Screen {
                 ", scoreLabel=" + scoreLabel +
                 ", highScoreLabel=" + highScoreLabel +
                 ", controls=" + controls +
-                ", preferences=" + preferences +
                 ", currentColor=" + currentColor +
                 ", score=" + score +
                 ", alphaColor=" + alphaColor +

@@ -48,6 +48,7 @@ public class GameOverScreen implements Screen {
         this.game = game;
         game.toggleAds(true);
         firstShow = true;
+        game.changeFirstTime();
         
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));

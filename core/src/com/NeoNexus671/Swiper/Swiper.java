@@ -3,11 +3,16 @@ package com.NeoNexus671.Swiper;
 import com.NeoNexus671.Swiper.screens.MenuScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+
+import static com.NeoNexus671.Swiper.screens.PlayScreen.HIGHSCORE;
+import static com.NeoNexus671.Swiper.screens.PlayScreen.HIGH_SCORE;
+import static com.NeoNexus671.Swiper.screens.PlayScreen.SWIPER;
 
 public class Swiper extends Game {
     public static final String SF_TTF = "SF.ttf";
@@ -17,11 +22,14 @@ public class Swiper extends Game {
     public SpriteBatch batch;
     public BitmapFont titleFont;
     public BitmapFont textFont;
+    public BitmapFont dialogFont;
     public float aspectRatio;
     public static float volume = 1.0f;
     public static int speakerCurrent = 0;
     public float densityIndependentSize;
     public PlayServices playServices;
+    public Preferences preferences;
+    public final String firstTime = "FirstTime";
 
 
     public Swiper(AdHandler handler) {
@@ -37,6 +45,14 @@ public class Swiper extends Game {
         densityIndependentSize =  75 * Gdx.graphics.getDensity();
         int fontSize = Math.round(densityIndependentSize);
         createFonts(fontSize);
+        preferences = Gdx.app.getPreferences(SWIPER);
+        if (!preferences.contains(HIGH_SCORE)) {
+            preferences.putInteger(HIGHSCORE, 0);
+        }
+        if(!preferences.contains(firstTime)){
+            preferences.putBoolean(firstTime,true);
+        }
+        preferences.flush();
         setScreen(new MenuScreen(this));
     }
 
@@ -49,6 +65,8 @@ public class Swiper extends Game {
         textFont = generator.generateFont(parameter);
         parameter.size = fontsize;
         titleFont = generator.generateFont(parameter);
+        parameter.size = (int)Math.round((fontsize*.20));
+        dialogFont = generator.generateFont(parameter);
         generator.dispose();
     }
 
@@ -86,5 +104,12 @@ public class Swiper extends Game {
                 ", aspectRatio=" + aspectRatio +
                 ", handler=" + handler +
                 '}';
+    }
+    public boolean getFirstTime() {
+        return preferences.getBoolean(firstTime);
+    }
+    public void changeFirstTime(){
+        preferences.putBoolean(firstTime,false);
+        preferences.flush();
     }
 }
