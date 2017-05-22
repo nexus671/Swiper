@@ -77,7 +77,7 @@ public class MenuScreen implements Screen {
         //dialog.setBounds(100,100,500,500);
         objLabel = new Label("The objective of this game is to swipe in the direction displayed at the top of the screen. You have 20 turns to memorize which color corresponds with which direction. Be quick and decisive!",new LabelStyle(game.dialogFont, Color.ORANGE));
         objLabel.setWrap(true);
-        dialog.add(objLabel).width((int) (Gdx.graphics.getWidth()/1.8));
+
         if(game.getFirstTime()){
             dialog.show(stage);
         } else {

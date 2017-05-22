@@ -39,17 +39,19 @@ public class GameOverScreen implements Screen {
     private final Label highScoreLabel;
     private final Sound sound1;
     private final Sound sound2;
+    private final Sprite highScore;
+    private final Rectangle highScoreButton;
     private final ShapeRenderer shapeRenderer;
     private final Rectangle playButton;
     private final Rectangle menuButton;
-    private boolean firstShow;
 
     public GameOverScreen(Swiper game, PlayScreen playScreen) {
         this.game = game;
         game.toggleAds(true);
-        firstShow = true;
         game.changeFirstTime();
-        
+        highScore = new Sprite(new Texture(Gdx.files.internal("histogram.png")));
+        highScore.setPosition((Gdx.graphics.getWidth() / 2) -(highScore.getWidth()/2), Gdx.graphics.getHeight() * 0.15f);
+        highScoreButton = new Rectangle((Gdx.graphics.getWidth() / 2) -(highScore.getWidth()/2),(Gdx.graphics.getHeight() * 0.85f) - highScore.getHeight(),highScore.getWidth(),highScore.getHeight());
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
         
@@ -97,6 +99,7 @@ public class GameOverScreen implements Screen {
         menuLabel.draw(game.batch, 1);
         scoreLabel.draw(game.batch, 1);
         highScoreLabel.draw(game.batch, 1);
+        highScore.draw(game.batch,1);
         game.batch.end();
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.begin(ShapeType.Line);
@@ -104,13 +107,9 @@ public class GameOverScreen implements Screen {
         shapeRenderer.line(0, (Gdx.graphics.getHeight() * .40f) + menuLabel.getHeight(), Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() * .40f) + menuLabel.getHeight());
         shapeRenderer.line(0, (Gdx.graphics.getHeight() * .20f) + menuLabel.getHeight(), Gdx.graphics.getWidth(), (Gdx.graphics.getHeight() * .20f) + menuLabel.getHeight());
         shapeRenderer.end();
-        if(firstShow){
-            game.playServices.showScore();
-            firstShow = false;
-        }
         handleInput();
     }
-    
+
     private void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
@@ -129,6 +128,8 @@ public class GameOverScreen implements Screen {
                     sound1.play(Swiper.volume);
                     sound2.play(Swiper.volume);
                     game.setScreen(new MenuScreen(game));
+                }else if (highScoreButton.contains(Gdx.input.getX(), Gdx.input.getY())) {
+                    game.playServices.showScore();
                 }
             }
         }
