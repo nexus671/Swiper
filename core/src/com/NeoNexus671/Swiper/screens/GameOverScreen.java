@@ -85,7 +85,6 @@ public class GameOverScreen implements Screen {
     }
 
 
-    @SuppressWarnings("Duplicates")
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -111,8 +110,7 @@ public class GameOverScreen implements Screen {
         }
         handleInput();
     }
-
-    @SuppressWarnings("Duplicates")
+    
     private void handleInput() {
 
         if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
