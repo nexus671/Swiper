@@ -115,6 +115,8 @@ public class MenuScreen implements Screen {
         speakerSwitch.add(speakerOff);
         speakerSwitch.add(speakerOn);
         speaker.setTexture(speakerSwitch.get(Swiper.speakerCurrent));
+        speaker.scale(Gdx.graphics.getDensity()/50);
+        info.scale(Gdx.graphics.getDensity()/50);
 
 
 

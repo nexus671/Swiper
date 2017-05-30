@@ -51,6 +51,7 @@ public class GameOverScreen implements Screen {
         game.changeFirstTime();
         highScore = new Sprite(new Texture(Gdx.files.internal("histogram.png")));
         highScore.setPosition((Gdx.graphics.getWidth() / 2) -(highScore.getWidth()/2), Gdx.graphics.getHeight() * 0.15f);
+        highScore.scale(Gdx.graphics.getDensity()/50);
         highScoreButton = new Rectangle((Gdx.graphics.getWidth() / 2) -(highScore.getWidth()/2),(Gdx.graphics.getHeight() * 0.85f) - highScore.getHeight(),highScore.getWidth(),highScore.getHeight());
         sound1 = Gdx.audio.newSound(Gdx.files.internal(G5_OGG));
         sound2 = Gdx.audio.newSound(Gdx.files.internal(C5_OGG));
